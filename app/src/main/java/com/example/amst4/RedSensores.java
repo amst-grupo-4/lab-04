@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -32,6 +33,12 @@ public class RedSensores extends AppCompatActivity {
         Intent login = getIntent();
         this.token = (String) login.getExtras().get("token");
         revisarSensores();
+    }
+
+    public void irAAnadirTemperatura(View view){
+        Intent addTemp= new Intent(getBaseContext(),AddTemp.class);
+        addTemp.putExtra("token", token);
+        startActivity(addTemp);
     }
 
     private void revisarSensores() {

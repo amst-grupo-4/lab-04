@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AMST4</string>
+    <string name="menu_principal">Menu Principal</string>
+    <string name="control_de_sensores">Control de sensores</string>
+    <string name="historial_de_pedidos">Historial de pedidos</string>
+    <string name="base_privada">Base Privada</string>
+    <string name="salir">Salir</string>
 </resources>

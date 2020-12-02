@@ -50,7 +50,7 @@ public class AddTemp extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Intent menuPrincipal = new Intent(getBaseContext(), MainActivity.class);
+                    Intent menuPrincipal = new Intent(getBaseContext(), Menu.class);
                     menuPrincipal.putExtra("token", token);
                     startActivity(menuPrincipal);
                 } catch (Exception e) {
@@ -60,24 +60,32 @@ public class AddTemp extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                AlertDialog alertDialog = new AlertDialog.Builder(AddTemp.class).create();
-                alertDialog.setTitle("Alerta");
-                alertDialog.setMessage("Error al insertar temperatura");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.show();
+                mostrarDialogo();
             }
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
+               Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", "JWT " + token);
                 return params;
             }
         };
+    }
+
+    private void mostrarDialogo(){
+
+
+        AlertDialog alertDialog = new
+                AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Alerta");
+        alertDialog.setTitle("Alerta");
+        alertDialog.setMessage("Error al insertar temperatura");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }

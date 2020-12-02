@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 
 public class Menu extends AppCompatActivity {
-
     String token = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
