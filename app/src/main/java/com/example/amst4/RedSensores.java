@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RedSensores extends AppCompatActivity {
-
     private RequestQueue mQueue;
     private String token = "";
 
@@ -50,17 +51,17 @@ public class RedSensores extends AppCompatActivity {
                 Request.Method.GET, url_temp, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                System.out.println(response);
-                try {
-                    tempValue.setText(response.getString("temperatura") + " °C");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.e("Volly Error", error.toString());
 
+                NetworkResponse networkResponse = error.networkResponse;
+                if (networkResponse != null) {
+                    Log.e("Status code", String.valueOf(networkResponse.statusCode));
+                }
             }
         }) {
             @Override
@@ -94,7 +95,6 @@ public class RedSensores extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", "JWT " + token);
-                System.out.println(token);
                 return params;
             }
         };
@@ -124,7 +124,6 @@ public class RedSensores extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", "JWT " + token);
-                System.out.println(token);
                 return params;
             }
         };
